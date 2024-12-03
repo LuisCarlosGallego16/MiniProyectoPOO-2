@@ -9,30 +9,39 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuAyuda">
           <Properties>
-            <Property name="text" type="java.lang.String" value="AYUDA"/>
+            <Property name="text" type="java.lang.String" value="Ayuda"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemAcercaDe">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Acerca de..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemAcercaDeActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuInfo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="INFO"/>
+            <Property name="text" type="java.lang.String" value="Info"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemContacto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Contactanos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemContactoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemSoporte">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Soporte"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemSoporteActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -65,24 +74,47 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="252" max="-2" attributes="0"/>
-              <Component id="botonContinuar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-              <Component id="botonSalir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="250" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+              <Component id="botonContinuar" min="-2" pref="112" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+              <Component id="botonSalir" min="-2" pref="83" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="146" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="156" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="333" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="158" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="botonContinuar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonContinuar" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="botonSalir" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,6 +137,30 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonSalirActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Black" size="18" style="2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&#xa1;BIENVENIDO!"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Black" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="TIENDA VIRTUAL TECNOLOGICA"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Black" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="PARA CONOCER NUESTROS PRODUCTOS, DALE CLICK AL BOTON CONTINUAR!!"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

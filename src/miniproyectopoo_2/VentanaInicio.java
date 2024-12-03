@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package miniproyectopoo_2;
 
 import java.awt.event.KeyEvent;
@@ -26,9 +22,9 @@ public class VentanaInicio extends javax.swing.JFrame {
         initComponents();
         ventanaPrincipal = new VentanaPrincipal();
         tablaProductosUsuario = new TablaProductosUsuario();
-        panelUsuario = new PanelUsuario();
+        panelUsuario = new PanelUsuario(this, ventanaPrincipal);
         tablaProductosAdmin = new TablaProductosAdmin();
-        panelAdmin = new PanelAdmin();
+        panelAdmin = new PanelAdmin(this, ventanaPrincipal);
     }
 
     /**
@@ -42,6 +38,9 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         botonContinuar = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAyuda = new javax.swing.JMenu();
         menuItemAcercaDe = new javax.swing.JMenuItem();
@@ -72,21 +71,45 @@ public class VentanaInicio extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel1.setText("¡BIENVENIDO!");
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel2.setText("TIENDA VIRTUAL TECNOLOGICA");
+
+        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jLabel3.setText("PARA CONOCER NUESTROS PRODUCTOS, DALE CLICK AL BOTON CONTINUAR!!");
+
         jMenuBar1.setFocusable(false);
 
-        menuAyuda.setText("AYUDA");
+        menuAyuda.setText("Ayuda");
 
         menuItemAcercaDe.setText("Acerca de...");
+        menuItemAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAcercaDeActionPerformed(evt);
+            }
+        });
         menuAyuda.add(menuItemAcercaDe);
 
         jMenuBar1.add(menuAyuda);
 
-        menuInfo.setText("INFO");
+        menuInfo.setText("Info");
 
         menuItemContacto.setText("Contactanos");
+        menuItemContacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemContactoActionPerformed(evt);
+            }
+        });
         menuInfo.add(menuItemContacto);
 
         menuItemSoporte.setText("Soporte");
+        menuItemSoporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSoporteActionPerformed(evt);
+            }
+        });
         menuInfo.add(menuItemSoporte);
 
         jMenuBar1.add(menuInfo);
@@ -98,20 +121,38 @@ public class VentanaInicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(252, 252, 252)
-                .addComponent(botonContinuar)
-                .addGap(129, 129, 129)
-                .addComponent(botonSalir)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGap(251, 251, 251)
+                .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(183, 183, 183)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(333, 333, 333))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(282, 282, 282))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(70, 70, 70))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonContinuar)
-                    .addComponent(botonSalir))
-                .addGap(96, 96, 96))
+                    .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
         );
 
         pack();
@@ -134,13 +175,54 @@ public class VentanaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        int confirmacion = JOptionPane.showConfirmDialog(this,"¿ESTAS SEGURO QUE QUIERES SALIR DE LA APLICACION?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
-        if(confirmacion == JOptionPane.YES_OPTION){
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE QUIERES SALIR DE LA APLICACION?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
+        if (confirmacion == JOptionPane.YES_OPTION) {
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "SIGUE COMPRANDO! :)");
         }
     }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void menuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAcercaDeActionPerformed
+        String mensaje = "SOMOS TIENDA VIRTUAL PARA COMPRAR PRODUCTOS TECNOLOGICOS\n"
+                + "\n"
+                + "PARA CONOCER NUESTROS PRODUCTOS, DALE CLICK AL BOTON CONTINUAR!\n"
+                + "\n"
+                + "TODOS NUESTROS CANALES DE AYUDA Y SOPORTE, ESTAN EN NUESTRA OPCION DE 'INFO'";
+        JOptionPane.showMessageDialog(this, mensaje, "AYUDA", JOptionPane.INFORMATION_MESSAGE);
+
+
+    }//GEN-LAST:event_menuItemAcercaDeActionPerformed
+
+    private void menuItemContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemContactoActionPerformed
+        String mensaje = "PARA COMUNICARTE CON NOSOTROS HAZLO POR ESTOS CANALES:\n"
+                + "\n"
+                + "FACEBOOK: tiendavirtualluisito\n"
+                + "\n"
+                + "INSTAGRAM: @virtualtiendaluisito\n"
+                + "\n"
+                + "WHATSAPP: 1234556\n"
+                + "\n"
+                + "SI REQUIERES CUALQUIER TIPO DE AYUDA O SOPORTE, EN LA OPCION 'SOPORTE' ESTAN LOS CONTACTOS ESPECIALIZADOS";
+
+        JOptionPane.showMessageDialog(this, mensaje, "CONTACTANOS", JOptionPane.INFORMATION_MESSAGE);
+
+
+    }//GEN-LAST:event_menuItemContactoActionPerformed
+
+    private void menuItemSoporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSoporteActionPerformed
+        String mensaje = "SI REQUIERES UN SOPORTE ESPECALIZADO O HABLAR CON UNO DE NUESTROS ASESORES, TENEMOS LOS SIGUIENTES CANALES:\n"
+                + "\n"
+                + "CORREO ELECTRONICO: tiendavirtualluisito@gmail.com y soportevirtualtiendaluisito@gmail.com \n "
+                + "\n"
+                + "WHATSAPP: 098765431\n"
+                + "\n"
+                + "POR ESTOS CANALES NUESTROS ASESORES ESTARAN DISPONIBLES ANTE CUALQUIER DUDA O INQUIETUD!";
+
+        JOptionPane.showMessageDialog(this, mensaje, "SOPORTE", JOptionPane.INFORMATION_MESSAGE);
+
+
+    }//GEN-LAST:event_menuItemSoporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +262,9 @@ public class VentanaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonContinuar;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenu menuInfo;
