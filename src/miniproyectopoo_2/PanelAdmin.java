@@ -6,6 +6,18 @@ package miniproyectopoo_2;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -90,6 +102,110 @@ public class PanelAdmin extends javax.swing.JPanel {
         return precioTotalProducto;
     }
 
+        //Metodo para crear y guardar datos en archivo xml
+    public void guardarXML(String nombreArchivo) {
+        try {
+            DefaultTableModel modelo = tablaProductosAdmin.getModeloTabla();
+            
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document documento = builder.newDocument();
+
+            Element raiz = documento.createElement("productos");
+            documento.appendChild(raiz);
+
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                Element producto = documento.createElement("producto");
+
+                Element codigo = documento.createElement("codigo");
+                codigo.appendChild(documento.createTextNode(modelo.getValueAt(i, 0).toString()));
+                producto.appendChild(codigo);
+
+                Element nombre = documento.createElement("nombre");
+                nombre.appendChild(documento.createTextNode(modelo.getValueAt(i, 1).toString()));
+                producto.appendChild(nombre);
+
+                Element precio = documento.createElement("precio");
+                precio.appendChild(documento.createTextNode(modelo.getValueAt(i, 2).toString()));
+                producto.appendChild(precio);
+
+                
+                Element impuesto = documento.createElement("impuesto");
+                impuesto.appendChild(documento.createTextNode(modelo.getValueAt(i, 3).toString()));
+                producto.appendChild(impuesto);
+                
+                Element categoria = documento.createElement("categoria");
+                categoria.appendChild(documento.createTextNode(modelo.getValueAt(i, 4).toString()));
+                producto.appendChild(categoria);
+                
+                Element total = documento.createElement("total");
+                total.appendChild(documento.createTextNode(modelo.getValueAt(i, 5).toString()));
+                producto.appendChild(total);
+                raiz.appendChild(producto);
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource domSource = new DOMSource(documento);
+            StreamResult streamResult = new StreamResult(new File(nombreArchivo));
+            transformer.transform(domSource, streamResult);
+
+            System.out.println("Archivo XML generado correctamente: " + nombreArchivo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+    //METODO PARA CARGAR EL ARCHIVO XML EN LA TABLA 
+    public void cargarDesdeXML(String nombreArchivo) {
+    try {
+        DefaultTableModel modelo = tablaProductosAdmin.getModeloTabla();
+                
+        File archivo = new File(nombreArchivo);
+
+        if (!archivo.exists()) {
+            System.out.println("El archivo XML no existe. Se creará uno nuevo cuando se guarde.");
+            return;
+        }
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document documento = builder.parse(archivo);
+
+        NodeList listaProductos = documento.getElementsByTagName("producto");
+
+        modelo.setRowCount(0);
+
+        for (int i = 0; i < listaProductos.getLength(); i++) {
+            Node productoNode = listaProductos.item(i);
+
+            if (productoNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element producto = (Element) productoNode;
+
+                String codigo = producto.getElementsByTagName("codigo").item(0).getTextContent();
+                String nombre = producto.getElementsByTagName("nombre").item(0).getTextContent();
+                String precio = producto.getElementsByTagName("precio").item(0).getTextContent();
+                String impuesto = producto.getElementsByTagName("impuesto").item(0).getTextContent();
+                String categoria = producto.getElementsByTagName("categoria").item(0).getTextContent();
+                String total = producto.getElementsByTagName("total").item(0).getTextContent();
+
+                modelo.addRow(new Object[]{codigo, nombre, precio, impuesto,categoria,total});
+            }
+        }
+
+        System.out.println("Datos cargados desde el archivo XML.");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al cargar los datos desde el archivo XML");
+    }
+}
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,6 +290,11 @@ public class PanelAdmin extends javax.swing.JPanel {
         });
 
         botonCargar.setText("CARGAR");
+        botonCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCargarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -299,7 +420,8 @@ public class PanelAdmin extends javax.swing.JPanel {
         } else {
             Object nuevaFila[] = {codigoProducto, nombreProducto, precioProducto, impuestoProducto, categoriaProducto, precioTotalProducto};
             modelo.addRow(nuevaFila);
-
+            guardarXML("productos.xml");
+            
             campoCodigoProducto.setText("");
             campoNombreProducto.setText("");
             campoPrecioProducto.setText("");
@@ -331,6 +453,8 @@ public class PanelAdmin extends javax.swing.JPanel {
                 modelo.setValueAt(categoriaProducto, filaSeleccionada, 4);
                 modelo.setValueAt(precioTotalProducto, filaSeleccionada, 5);
 
+                guardarXML("productos.xml");
+                
                 campoCodigoProducto.setText("");
                 campoNombreProducto.setText("");
                 campoPrecioProducto.setText("");
@@ -352,6 +476,8 @@ public class PanelAdmin extends javax.swing.JPanel {
             if (filaSeleccionada != -1) {
                 modelo.removeRow(filaSeleccionada);
                 
+                guardarXML("productos.xml");
+                
                 campoCodigoProducto.setText("");
                 campoNombreProducto.setText("");
                 campoPrecioProducto.setText("");
@@ -365,6 +491,12 @@ public class PanelAdmin extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_botonEliminarActionPerformed
+
+    private void botonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarActionPerformed
+
+        cargarDesdeXML("productos.xml");
+
+    }//GEN-LAST:event_botonCargarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
