@@ -4,17 +4,36 @@
  */
 package miniproyectopoo_2;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luisc
  */
 public class TablaProductosUsuario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form TablaProductosUsuario
-     */
+
+    private DefaultTableModel modeloDestino;
     public TablaProductosUsuario() {
         initComponents();
+        modeloDestino = getModeloTabla();
+    }
+    
+    
+        //Metodo para obtener el modelo de la tabla
+    public DefaultTableModel getModeloTabla() {
+        return (DefaultTableModel) getTabla().getModel();
+    }
+
+    //OBTENER TABLA
+    public JTable getTabla() {
+        return jTable1;
+    }
+
+    //metodo para obtener la fila de la tabla.
+      public int obtenerFila() {
+        return getTabla().getSelectedRow();
     }
 
     /**

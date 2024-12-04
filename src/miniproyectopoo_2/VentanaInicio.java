@@ -21,10 +21,11 @@ public class VentanaInicio extends javax.swing.JFrame {
     public VentanaInicio() {
         initComponents();
         ventanaPrincipal = new VentanaPrincipal();
-        panelAdmin = new PanelAdmin(this, ventanaPrincipal,null);
+        panelAdmin = new PanelAdmin(this, ventanaPrincipal,null,null);
         tablaProductosAdmin = new TablaProductosAdmin(panelAdmin);
         panelAdmin.setTablaProductosAdmin(tablaProductosAdmin);
         tablaProductosUsuario = new TablaProductosUsuario();
+        panelAdmin.setTablaProductosUsuario(tablaProductosUsuario);
         panelUsuario = new PanelUsuario(this, ventanaPrincipal);
        
         

@@ -4,6 +4,7 @@
  */
 package miniproyectopoo_2;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,12 +17,12 @@ public class TablaProductosAdmin extends javax.swing.JPanel {
     /**
      * Creates new form TablaProductosAdmin
      */
-    private DefaultTableModel modelo;
+    private DefaultTableModel modeloOrigen;
     private PanelAdmin panelAdmin;
     public TablaProductosAdmin(PanelAdmin panelAdmin) {
         initComponents();
         this.panelAdmin = panelAdmin;
-        modelo = getModeloTabla();
+        modeloOrigen = getModeloTabla();
     }
 
     //Metodo para obtener el modelo de la tabla
@@ -39,7 +40,25 @@ public class TablaProductosAdmin extends javax.swing.JPanel {
         return getTabla().getSelectedRow();
     }
 
-    
+    /*  
+      public void transferirProductos(DefaultTableModel modeloOrigen , DefaultTableModel modeloDestino, int filaSeleccionada ){
+          if(filaSeleccionada != -1){
+            String codigoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 0);
+            String nombreProducto = (String) modeloOrigen.getValueAt(filaSeleccionada,1);
+            String precioProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 2).toString();
+            String impuestoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 3).toString();
+            String categoriaProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 4);
+            String totalProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 5).toString();
+            
+            Object nuevaFila[] = {codigoProducto , nombreProducto , totalProducto , categoriaProducto};
+            modeloDestino.addRow(nuevaFila);
+              JOptionPane.showMessageDialog(this, "DATOS TRANSFERIDOS CORRECTAMENTE ");
+          }else{
+              JOptionPane.showMessageDialog(this, "POR FAVOR SELECCIONA UNA FILA");
+          }
+          
+      }
+    */
     
     
     
@@ -86,12 +105,12 @@ public class TablaProductosAdmin extends javax.swing.JPanel {
        int filaSeleccionada = obtenerFila();
         if(filaSeleccionada != -1){
             //OBTENEMOS LOS DATOS DE LA TABLA.
-            String codigoProducto = (String) modelo.getValueAt(filaSeleccionada, 0);
-            String nombreProducto = (String) modelo.getValueAt(filaSeleccionada,1);
-            String precioProducto = (String) modelo.getValueAt(filaSeleccionada, 2).toString();
-            String impuestoProducto = (String) modelo.getValueAt(filaSeleccionada, 3).toString();
-            String categoriaProducto = (String) modelo.getValueAt(filaSeleccionada, 4);
-            String totalProducto = (String) modelo.getValueAt(filaSeleccionada, 5).toString();
+            String codigoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 0);
+            String nombreProducto = (String) modeloOrigen.getValueAt(filaSeleccionada,1);
+            String precioProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 2).toString();
+            String impuestoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 3).toString();
+            String categoriaProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 4);
+            String totalProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 5).toString();
             
             panelAdmin.setCampoCodigoProducto(codigoProducto);
             panelAdmin.setCampoNombreProducto(nombreProducto);
