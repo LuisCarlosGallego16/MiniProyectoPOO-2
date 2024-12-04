@@ -17,8 +17,10 @@ public class TablaProductosAdmin extends javax.swing.JPanel {
      * Creates new form TablaProductosAdmin
      */
     private DefaultTableModel modelo;
-    public TablaProductosAdmin() {
+    private PanelAdmin panelAdmin;
+    public TablaProductosAdmin(PanelAdmin panelAdmin) {
         initComponents();
+        this.panelAdmin = panelAdmin;
         modelo = getModeloTabla();
     }
 
@@ -81,18 +83,28 @@ public class TablaProductosAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int filaSeleccionada = obtenerFila();
+       int filaSeleccionada = obtenerFila();
         if(filaSeleccionada != -1){
             //OBTENEMOS LOS DATOS DE LA TABLA.
             String codigoProducto = (String) modelo.getValueAt(filaSeleccionada, 0);
             String nombreProducto = (String) modelo.getValueAt(filaSeleccionada,1);
-            String precioProducto = (String) modelo.getValueAt(filaSeleccionada, 2);
-            String impuestoProducto = (String) modelo.getValueAt(filaSeleccionada, 3);
+            String precioProducto = (String) modelo.getValueAt(filaSeleccionada, 2).toString();
+            String impuestoProducto = (String) modelo.getValueAt(filaSeleccionada, 3).toString();
             String categoriaProducto = (String) modelo.getValueAt(filaSeleccionada, 4);
-            String totalProducto = (String) modelo.getValueAt(filaSeleccionada, 5);
+            String totalProducto = (String) modelo.getValueAt(filaSeleccionada, 5).toString();
+            
+            panelAdmin.setCampoCodigoProducto(codigoProducto);
+            panelAdmin.setCampoNombreProducto(nombreProducto);
+            panelAdmin.setCampoPrecioProducto(precioProducto);
+            panelAdmin.setCampoImpuestoProducto(impuestoProducto);
+            panelAdmin.setCampoCategoriaProducto(categoriaProducto);
+            panelAdmin.setCampoTotalProducto(totalProducto);
+            
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    
+            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
