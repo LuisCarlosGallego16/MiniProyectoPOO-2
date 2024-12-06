@@ -17,16 +17,18 @@ public class VentanaInicio extends javax.swing.JFrame {
     private PanelUsuario panelUsuario;
     private TablaProductosAdmin tablaProductosAdmin;
     private PanelAdmin panelAdmin;
+    private Factura factura;
 
-    public VentanaInicio() {
+    public VentanaInicio() { 
         initComponents();
         ventanaPrincipal = new VentanaPrincipal();
+        factura = new Factura(this,true);
         panelAdmin = new PanelAdmin(this, ventanaPrincipal,null,null);
         tablaProductosAdmin = new TablaProductosAdmin(panelAdmin);
         panelAdmin.setTablaProductosAdmin(tablaProductosAdmin);
         tablaProductosUsuario = new TablaProductosUsuario();
         panelAdmin.setTablaProductosUsuario(tablaProductosUsuario);
-        panelUsuario = new PanelUsuario(this, ventanaPrincipal);
+        panelUsuario = new PanelUsuario(this, ventanaPrincipal,factura);
        
         
     }

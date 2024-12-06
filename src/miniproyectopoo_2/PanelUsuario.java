@@ -17,11 +17,13 @@ public class PanelUsuario extends javax.swing.JPanel {
      */
     private VentanaPrincipal ventanaPrincipal;
     private VentanaInicio ventanaInicio;
+    private Factura factura;
 
-    public PanelUsuario(VentanaInicio ventanaInicio , VentanaPrincipal ventanaPrincipal) {
+    public PanelUsuario(VentanaInicio ventanaInicio , VentanaPrincipal ventanaPrincipal,  Factura factura) {
         initComponents();
         this.ventanaInicio = ventanaInicio;
         this.ventanaPrincipal = ventanaPrincipal;
+        this.factura = factura;
 
     }
 
@@ -46,6 +48,11 @@ public class PanelUsuario extends javax.swing.JPanel {
         jLabel2.setText("SELECCIONA UN PRODUCTO DE LA TABLA");
 
         botonComprar.setText("COMPRAR");
+        botonComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonComprarActionPerformed(evt);
+            }
+        });
 
         botonVolver.setText("VOLVER");
         botonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +104,19 @@ public class PanelUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "SIGUE COMPRANDO!!!");
         }
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonComprarActionPerformed
+        int confirmacion= JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO DEL PRODUCTO A COMPRAR?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
+        if(confirmacion == JOptionPane.YES_OPTION){
+            
+            factura.setVisible(true);
+        }
+
+
+
+
+
+    }//GEN-LAST:event_botonComprarActionPerformed
 
 //@SuppressWarnings("unchecked")
     // Variables declaration - do not modify//GEN-BEGIN:variables
