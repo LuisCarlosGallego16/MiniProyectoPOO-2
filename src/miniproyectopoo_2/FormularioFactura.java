@@ -91,6 +91,18 @@ public class FormularioFactura extends javax.swing.JDialog {
         this.campoFacturaTotal.setText(texto);
     }
     
+    //METODO PARA GUARDAR EN ARCHIVO JSON
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -324,12 +336,6 @@ public class FormularioFactura extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(this, "SIGUE LLENADO LOS CAMPOS CON TU INFORMACION!");
         }
-               
-
-
-
-
-
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
