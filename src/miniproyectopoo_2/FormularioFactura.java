@@ -4,20 +4,97 @@
  */
 package miniproyectopoo_2;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luisc
  */
-public class Factura extends javax.swing.JDialog {
+public class FormularioFactura extends javax.swing.JDialog {
 
     /**
-     * Creates new form Factura
+     * Creates new form FormularioFactura
      */
-    public Factura(java.awt.Frame parent, boolean modal) {
+    private TablaProductosAdmin tablaProductosAdmin;
+    private TablaFacturas tablaFacturas;
+    
+    public FormularioFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
-
+    
+    public void setTablaFactura(TablaFacturas tablaFacturas){
+        this.tablaFacturas = tablaFacturas;
+    }
+    
+    //GETTER
+    
+    public String getCampoFacturaNombre(){
+        return campoFacturaNombre.getText();
+    }
+    
+    public String getCampoFacturaIdentificacion(){
+        return campoFacturaCategoria.getText();
+    }
+    
+    public String getCampoFacturaDireccion(){
+        return campoFacturaDirreccion.getText();
+    }
+    
+    public String getCampoFacturaCodigoProducto(){
+        return campoFacturaCodigo.getText();
+    }
+    public String getCampoFacturaNombreProducto(){
+        return campoFacturaNombreProducto.getText();
+    }
+    public String getCampoFacturaPrecioProducto(){
+        return campoFacturaPrecio.getText();
+    }
+    
+    public String getCampoFacturaImpuestoProducto(){
+        return campoFacturaImpuesto.getText();
+    }
+    
+    public String getCampoFacturaCategoriaProducto(){
+        return campoFacturaCategoria.getText();
+    }
+    public String getCampoFacturaTotalProducto(){
+        return campoFacturaTotal.getText();
+    }
+    
+    // SETTERS
+    public void setCampoFacturaCodigoProducto(String texto){
+        this.campoFacturaCodigo.setText(texto);
+    }
+    
+    public void setCampoFacturaNombreProducto(String texto){
+        this.campoFacturaNombreProducto.setText(texto);
+    }
+    
+    public void setCampoFacturaPrecioProducto(String texto){
+        this.campoFacturaPrecio.setText(texto);
+      
+    }
+    
+    public void setCampoFacturaImpuestoProducto(String texto){
+        this.campoFacturaImpuesto.setText(texto);
+        
+    }
+    
+    public void setCampoFacturaCategoriaProducto(String texto){
+        this.campoFacturaCategoria.setText(texto);
+    }
+    
+    public void setCampoFacturaPrecioTotalProducto(String texto){
+        this.campoFacturaTotal.setText(texto);
+    }
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,8 +179,18 @@ public class Factura extends javax.swing.JDialog {
         campoFacturaTotal.setEditable(false);
 
         botonGuardar.setText("GUARDAR");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
 
         botonCancelar.setText("CANCELAR");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,20 +245,20 @@ public class Factura extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(campoFacturaImpuesto))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(etiquetaTitulo11)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(57, 57, 57)
-                                        .addComponent(etiquetaTitulo12)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(botonGuardar)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(etiquetaTitulo11)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(57, 57, 57)
+                                            .addComponent(etiquetaTitulo12))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(campoFacturaCategoria)
                                     .addComponent(campoFacturaTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))))))
                 .addGap(210, 210, 210))
             .addGroup(layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(botonGuardar)
-                .addGap(81, 81, 81)
+                .addGap(417, 417, 417)
                 .addComponent(botonCancelar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -230,6 +317,52 @@ public class Factura extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO DE CANCELAR?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
+        if(confirmacion == JOptionPane.YES_OPTION){
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "SIGUE LLENADO LOS CAMPOS CON TU INFORMACION!");
+        }
+               
+
+
+
+
+
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+       DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla();
+       
+        //INFORMACION DEL PRODUCTO
+        String codigoProducto = getCampoFacturaCodigoProducto();
+        String nombreProducto = getCampoFacturaNombreProducto();
+        String precioProducto = getCampoFacturaPrecioProducto();
+        String impuestoProducto = getCampoFacturaImpuestoProducto();
+        String categoriaProducto = getCampoFacturaCategoriaProducto();
+        String precioTotal = getCampoFacturaTotalProducto();
+        
+        //INFORMACION DEL CLIENTE 
+        String nombreCliente = getCampoFacturaNombre();
+        String identificacionCliente = getCampoFacturaIdentificacion();
+        String direccionCliente = getCampoFacturaDireccion();
+        
+        if(nombreCliente.isEmpty() || identificacionCliente.isEmpty() || direccionCliente.isEmpty()){
+            JOptionPane.showMessageDialog(this, "LOS CAMPOS DE TU INFORMACION PERSONAL, DEBEN DE ESTAR COMPLETAMENTE DILIGENCIADOS");
+        }else{
+            Object nuevaFila[] = {codigoProducto,nombreProducto,precioProducto,impuestoProducto,categoriaProducto,precioTotal,nombreCliente,identificacionCliente,direccionCliente};
+            modeloFactura.addRow(nuevaFila);
+            JOptionPane.showMessageDialog(this, "SE HA GENERADO CORRECTAMENTE LA FACTURA!");
+            this.dispose();
+        }
+            
+        
+
+
+
+    }//GEN-LAST:event_botonGuardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,20 +380,21 @@ public class Factura extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Factura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Factura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Factura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Factura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormularioFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Factura dialog = new Factura(new javax.swing.JFrame(), true);
+                FormularioFactura dialog = new FormularioFactura(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

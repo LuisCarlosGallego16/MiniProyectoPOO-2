@@ -5,6 +5,7 @@
 package miniproyectopoo_2;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,13 +18,15 @@ public class PanelUsuario extends javax.swing.JPanel {
      */
     private VentanaPrincipal ventanaPrincipal;
     private VentanaInicio ventanaInicio;
-    private Factura factura;
+    private FormularioFactura factura;
+    private TablaProductosAdmin tablaProductosAdmin;
 
-    public PanelUsuario(VentanaInicio ventanaInicio , VentanaPrincipal ventanaPrincipal,  Factura factura) {
+    public PanelUsuario(VentanaInicio ventanaInicio , VentanaPrincipal ventanaPrincipal,TablaProductosAdmin tablaProductosAdmin, FormularioFactura factura) {
         initComponents();
         this.ventanaInicio = ventanaInicio;
         this.ventanaPrincipal = ventanaPrincipal;
         this.factura = factura;
+        this.tablaProductosAdmin = tablaProductosAdmin;
 
     }
 
@@ -106,10 +109,30 @@ public class PanelUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonComprarActionPerformed
-        int confirmacion= JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO DEL PRODUCTO A COMPRAR?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
-        if(confirmacion == JOptionPane.YES_OPTION){
+        int confirmacionProductoSeleccionado= JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO DEL PRODUCTO A COMPRAR?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
+        int filaSeleccionada = tablaProductosAdmin.obtenerFila();
+        DefaultTableModel modelo = tablaProductosAdmin.getModeloTabla();
+        if(confirmacionProductoSeleccionado == JOptionPane.YES_OPTION){
+            if(filaSeleccionada != -1){
+            String codigoProducto = (String) modelo.getValueAt(filaSeleccionada, 0);
+            String nombreProducto = (String) modelo.getValueAt(filaSeleccionada, 1);
+            String precioProducto = (String) modelo.getValueAt(filaSeleccionada, 2);
+            String impuestoProducto = (String) modelo.getValueAt(filaSeleccionada,3);
+            String categoriaProducto = (String) modelo.getValueAt(filaSeleccionada, 4);
+            String totalProducto = (String) modelo.getValueAt(filaSeleccionada, 5);
             
+            factura.setCampoFacturaCodigoProducto(codigoProducto);
+            factura.setCampoFacturaNombreProducto(nombreProducto);
+            factura.setCampoFacturaPrecioProducto(precioProducto);
+            factura.setCampoFacturaImpuestoProducto(impuestoProducto);
+            factura.setCampoFacturaCategoriaProducto(categoriaProducto);
+            factura.setCampoFacturaPrecioTotalProducto(totalProducto);
             factura.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "POR FAVOR SELECCIONA UNA FILA");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "SELECCIONADA CORRECTAMENTE EL PRODUCTO QUE QUIERES COMPRAR! :)");
         }
 
 

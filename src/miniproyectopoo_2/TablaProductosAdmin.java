@@ -40,25 +40,7 @@ public class TablaProductosAdmin extends javax.swing.JPanel {
         return getTabla().getSelectedRow();
     }
 
-    /*  
-      public void transferirProductos(DefaultTableModel modeloOrigen , DefaultTableModel modeloDestino, int filaSeleccionada ){
-          if(filaSeleccionada != -1){
-            String codigoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 0);
-            String nombreProducto = (String) modeloOrigen.getValueAt(filaSeleccionada,1);
-            String precioProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 2).toString();
-            String impuestoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 3).toString();
-            String categoriaProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 4);
-            String totalProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 5).toString();
-            
-            Object nuevaFila[] = {codigoProducto , nombreProducto , totalProducto , categoriaProducto};
-            modeloDestino.addRow(nuevaFila);
-              JOptionPane.showMessageDialog(this, "DATOS TRANSFERIDOS CORRECTAMENTE ");
-          }else{
-              JOptionPane.showMessageDialog(this, "POR FAVOR SELECCIONA UNA FILA");
-          }
-          
-      }
-    */
+
     
     
     

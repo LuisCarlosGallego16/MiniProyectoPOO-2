@@ -17,20 +17,23 @@ public class VentanaInicio extends javax.swing.JFrame {
     private PanelUsuario panelUsuario;
     private TablaProductosAdmin tablaProductosAdmin;
     private PanelAdmin panelAdmin;
-    private Factura factura;
+    private FormularioFactura formularioFactura;
+    private PanelFactura panelFactura;
+    private TablaFacturas tablaFacturas;
 
-    public VentanaInicio() { 
+    public VentanaInicio() {
         initComponents();
         ventanaPrincipal = new VentanaPrincipal();
-        factura = new Factura(this,true);
-        panelAdmin = new PanelAdmin(this, ventanaPrincipal,null,null);
+        tablaFacturas = new TablaFacturas();
+        formularioFactura = new FormularioFactura(this, true);
+        panelAdmin = new PanelAdmin(this, ventanaPrincipal, null, null);
         tablaProductosAdmin = new TablaProductosAdmin(panelAdmin);
         panelAdmin.setTablaProductosAdmin(tablaProductosAdmin);
         tablaProductosUsuario = new TablaProductosUsuario();
         panelAdmin.setTablaProductosUsuario(tablaProductosUsuario);
-        panelUsuario = new PanelUsuario(this, ventanaPrincipal,factura);
-       
-        
+        panelUsuario = new PanelUsuario(this, ventanaPrincipal, tablaProductosAdmin, formularioFactura);
+        formularioFactura.setTablaFactura(tablaFacturas);
+        panelFactura = new PanelFactura(this,ventanaPrincipal,tablaFacturas);
     }
 
     /**
@@ -176,6 +179,13 @@ public class VentanaInicio extends javax.swing.JFrame {
             ventanaPrincipal.setVisible(true);
             ventanaPrincipal.cambiarPanelContenedor1(tablaProductosAdmin);
             ventanaPrincipal.cambiarPanelContenedor2(panelAdmin);
+            this.dispose();
+        }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_F) {
+            ventanaPrincipal.setVisible(true);
+            ventanaPrincipal.cambiarPanelContenedor1(tablaFacturas);
+            ventanaPrincipal.cambiarPanelContenedor2(panelFactura);
             this.dispose();
         }
     }//GEN-LAST:event_formKeyPressed
