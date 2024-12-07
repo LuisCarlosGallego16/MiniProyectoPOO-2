@@ -1,0 +1,13 @@
+[
+  {
+    "codigoProducto": "1053",
+    "nombreProducto": "Mantequilla",
+    "precioProducto": 25000.0,
+    "impuestoProducto": 2000.0,
+    "categoriaProducto": "Lacteo",
+    "precioTotalProducto": 27000.0,
+    "nombreCliente": "asd",
+    "identificacionCliente": "Lacteo",
+    "direccionCliente": "asd"
+  }
+]

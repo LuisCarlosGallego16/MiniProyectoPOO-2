@@ -45,10 +45,11 @@ public class PanelAdmin extends javax.swing.JPanel {
         this.tablaProductosAdmin = tablaProductosAdmin;
     }
 
-    public void setTablaProductosUsuario(TablaProductosUsuario tablaProductosUsuario){
+    public void setTablaProductosUsuario(TablaProductosUsuario tablaProductosUsuario) {
         this.tablaProductosUsuario = tablaProductosUsuario;
-                
+
     }
+
     //GETTERS DE LOS CAMPOS DE TEXTO
     public String getCampoCodigoProducto() {
         return campoCodigoProducto.getText();
@@ -107,11 +108,11 @@ public class PanelAdmin extends javax.swing.JPanel {
         return precioTotalProducto;
     }
 
-        //Metodo para crear y guardar datos en archivo xml
+    //Metodo para crear y guardar datos en archivo xml
     public void guardarXML(String nombreArchivo) {
         try {
             DefaultTableModel modelo = tablaProductosAdmin.getModeloTabla();
-            
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document documento = builder.newDocument();
@@ -134,15 +135,14 @@ public class PanelAdmin extends javax.swing.JPanel {
                 precio.appendChild(documento.createTextNode(modelo.getValueAt(i, 2).toString()));
                 producto.appendChild(precio);
 
-                
                 Element impuesto = documento.createElement("impuesto");
                 impuesto.appendChild(documento.createTextNode(modelo.getValueAt(i, 3).toString()));
                 producto.appendChild(impuesto);
-                
+
                 Element categoria = documento.createElement("categoria");
                 categoria.appendChild(documento.createTextNode(modelo.getValueAt(i, 4).toString()));
                 producto.appendChild(categoria);
-                
+
                 Element total = documento.createElement("total");
                 total.appendChild(documento.createTextNode(modelo.getValueAt(i, 5).toString()));
                 producto.appendChild(total);
@@ -161,56 +161,52 @@ public class PanelAdmin extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-  
+
     //METODO PARA CARGAR EL ARCHIVO XML EN LA TABLA 
     public void cargarDesdeXML(String nombreArchivo) {
-    try {
-        DefaultTableModel modelo = tablaProductosAdmin.getModeloTabla();
-                
-        File archivo = new File(nombreArchivo);
+        try {
+            DefaultTableModel modelo = tablaProductosAdmin.getModeloTabla();
 
-        if (!archivo.exists()) {
-            System.out.println("El archivo XML no existe. Se creará uno nuevo cuando se guarde.");
-            return;
-        }
+            File archivo = new File(nombreArchivo);
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document documento = builder.parse(archivo);
-
-        NodeList listaProductos = documento.getElementsByTagName("producto");
-
-        modelo.setRowCount(0);
-
-        for (int i = 0; i < listaProductos.getLength(); i++) {
-            Node productoNode = listaProductos.item(i);
-
-            if (productoNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element producto = (Element) productoNode;
-
-                String codigo = producto.getElementsByTagName("codigo").item(0).getTextContent();
-                String nombre = producto.getElementsByTagName("nombre").item(0).getTextContent();
-                String precio = producto.getElementsByTagName("precio").item(0).getTextContent();
-                String impuesto = producto.getElementsByTagName("impuesto").item(0).getTextContent();
-                String categoria = producto.getElementsByTagName("categoria").item(0).getTextContent();
-                String total = producto.getElementsByTagName("total").item(0).getTextContent();
-
-                modelo.addRow(new Object[]{codigo, nombre, precio, impuesto,categoria,total});
+            if (!archivo.exists()) {
+                System.out.println("El archivo XML no existe. Se creará uno nuevo cuando se guarde.");
+                return;
             }
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document documento = builder.parse(archivo);
+
+            NodeList listaProductos = documento.getElementsByTagName("producto");
+
+            modelo.setRowCount(0);
+
+            for (int i = 0; i < listaProductos.getLength(); i++) {
+                Node productoNode = listaProductos.item(i);
+
+                if (productoNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element producto = (Element) productoNode;
+
+                    String codigo = producto.getElementsByTagName("codigo").item(0).getTextContent();
+                    String nombre = producto.getElementsByTagName("nombre").item(0).getTextContent();
+                    String precio = producto.getElementsByTagName("precio").item(0).getTextContent();
+                    String impuesto = producto.getElementsByTagName("impuesto").item(0).getTextContent();
+                    String categoria = producto.getElementsByTagName("categoria").item(0).getTextContent();
+                    String total = producto.getElementsByTagName("total").item(0).getTextContent();
+
+                    modelo.addRow(new Object[]{codigo, nombre, precio, impuesto, categoria, total});
+                }
+            }
+
+            System.out.println("Datos cargados desde el archivo XML.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos desde el archivo XML");
         }
-
-        System.out.println("Datos cargados desde el archivo XML.");
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error al cargar los datos desde el archivo XML");
     }
-}
-    
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -442,7 +438,7 @@ public class PanelAdmin extends javax.swing.JPanel {
             Object nuevaFila[] = {codigoProducto, nombreProducto, precioProducto, impuestoProducto, categoriaProducto, precioTotalProducto};
             modelo.addRow(nuevaFila);
             guardarXML("productos.xml");
-            
+
             campoCodigoProducto.setText("");
             campoNombreProducto.setText("");
             campoPrecioProducto.setText("");
@@ -475,7 +471,7 @@ public class PanelAdmin extends javax.swing.JPanel {
                 modelo.setValueAt(precioTotalProducto, filaSeleccionada, 5);
 
                 guardarXML("productos.xml");
-                
+
                 campoCodigoProducto.setText("");
                 campoNombreProducto.setText("");
                 campoPrecioProducto.setText("");
@@ -496,9 +492,9 @@ public class PanelAdmin extends javax.swing.JPanel {
         if (confirmacion == JOptionPane.YES_OPTION) {
             if (filaSeleccionada != -1) {
                 modelo.removeRow(filaSeleccionada);
-                
+
                 guardarXML("productos.xml");
-                
+
                 campoCodigoProducto.setText("");
                 campoNombreProducto.setText("");
                 campoPrecioProducto.setText("");
@@ -506,7 +502,7 @@ public class PanelAdmin extends javax.swing.JPanel {
                 campoCategoriaProducto.setText("");
                 campoTotalProducto.setText("");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "HAZ CANCELADO!");
         }
 
@@ -523,20 +519,18 @@ public class PanelAdmin extends javax.swing.JPanel {
         int filaSeleccionada = tablaProductosAdmin.obtenerFila();
         DefaultTableModel modeloOrigen = tablaProductosAdmin.getModeloTabla();
         DefaultTableModel modeloDestino = tablaProductosUsuario.getModeloTabla();
-        if(filaSeleccionada != -1){
-            String codigoProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 0);
-            String nombreProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 1);  
-            String categoriaProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 4);
-            String precioProducto = (String) modeloOrigen.getValueAt(filaSeleccionada, 5);
-            
-            Object nuevaFila[] = {codigoProducto , nombreProducto , categoriaProducto , precioProducto};
+        if (filaSeleccionada != -1) {
+            String codigoProducto = modeloOrigen.getValueAt(filaSeleccionada, 0).toString();
+            String nombreProducto = modeloOrigen.getValueAt(filaSeleccionada, 1).toString();
+            String categoriaProducto = modeloOrigen.getValueAt(filaSeleccionada, 4).toString();
+            String precioProducto = modeloOrigen.getValueAt(filaSeleccionada, 5).toString();
+            Object nuevaFila[] = {codigoProducto, nombreProducto, categoriaProducto, precioProducto};
             modeloDestino.addRow(nuevaFila);
             JOptionPane.showMessageDialog(this, "PRODUCTOS TRANSFERIDOS CORRECTAMENTE");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "SELECCIONA UNA FILA!!!");
         }
 
-        
 
     }//GEN-LAST:event_botonTrasnferirProductosActionPerformed
 

@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <productos>
     <producto>
-        <codigo>1111</codigo>
-        <nombre>1111</nombre>
-        <precio>1111</precio>
-        <impuesto>1111</impuesto>
-        <categoria>1111</categoria>
-        <total>2222.0</total>
+        <codigo>1054</codigo>
+        <nombre>Leche</nombre>
+        <precio>3200</precio>
+        <impuesto>200</impuesto>
+        <categoria>Lacteo</categoria>
+        <total>3400.0</total>
+    </producto>
+    <producto>
+        <codigo>1053</codigo>
+        <nombre>Mantequilla</nombre>
+        <precio>25000</precio>
+        <impuesto>2000</impuesto>
+        <categoria>Lacteo</categoria>
+        <total>27000.0</total>
     </producto>
 </productos>

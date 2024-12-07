@@ -121,6 +121,10 @@ public class PanelUsuario extends javax.swing.JPanel {
             String categoriaProducto = (String) modelo.getValueAt(filaSeleccionada, 4);
             String totalProducto = (String) modelo.getValueAt(filaSeleccionada, 5);
             
+            
+            factura.limpiarCamposFactura();
+            
+            
             factura.setCampoFacturaCodigoProducto(codigoProducto);
             factura.setCampoFacturaNombreProducto(nombreProducto);
             factura.setCampoFacturaPrecioProducto(precioProducto);

@@ -4,6 +4,11 @@
  */
 package miniproyectopoo_2;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.List;
+import java.io.FileWriter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -93,10 +98,62 @@ public class FormularioFactura extends javax.swing.JDialog {
     
     //METODO PARA GUARDAR EN ARCHIVO JSON
     
+    public void guardarArchivoJSON(){
+        DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla(); 
+        
+        List<Factura> listaFacturas = new ArrayList<Factura>();
+    // Iterar sobre cada fila de la tabla para obtener los valores
+    for (int i = 0; i < modeloFactura.getRowCount(); i++) {
+        // Obtener los datos de la fila
+        
+        //QUEDE ACA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        String codigoProducto = modeloFactura.getValueAt(i, 0).toString();
+        String nombreProducto = modeloFactura.getValueAt(i, 1).toString();
+        double precioProducto = Double.parseDouble(modeloFactura.getValueAt(i, 2).toString());
+        double impuestoProducto = Double.parseDouble(modeloFactura.getValueAt(i, 3).toString());
+        String  categoriaProducto= modeloFactura.getValueAt(i, 4).toString();
+        double precioTotalProducto = Double.parseDouble(modeloFactura.getValueAt(i, 5).toString());
+        
+        String nombreCliente = modeloFactura.getValueAt(i, 6).toString();
+
+        String identificacionCliente = modeloFactura.getValueAt(i, 7).toString();
+        String  direccionCliente= modeloFactura.getValueAt(i, 8).toString();
+        
+
+        // Crear una factura con los datos obtenidos de cada fila
+        Factura factura = new Factura(codigoProducto, nombreProducto, precioProducto, impuestoProducto, categoriaProducto,precioTotalProducto, nombreCliente, identificacionCliente, direccionCliente);
+        
+        // Añadir la factura a la lista
+        listaFacturas.add(factura);
+    }
+
+    // Usar Gson para convertir la lista de facturas a formato JSON
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    try (FileWriter file = new FileWriter("facturas.json")) {
+        // Convertir la lista a JSON y guardarlo en el archivo
+        gson.toJson(listaFacturas, file);
+        JOptionPane.showMessageDialog(this, "Datos guardados correctamente en el archivo JSON");
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        JOptionPane.showMessageDialog(this, "ERROR AL GUARDAR LOS DATOS EN EL ARCHIVO JSON");
+    }
+        
+    }
     
     
-    
-    
+    public void limpiarCamposFactura(){
+        campoFacturaCodigo.setText("");
+        campoFacturaNombreProducto.setText("");
+        campoFacturaPrecio.setText("");
+        campoFacturaImpuesto.setText("");
+        campoFacturaCategoria.setText("");
+        campoFacturaTotal.setText("");
+        
+        campoFacturaNombre.setText("");
+        campoFacturaIdentificacion.setText("");
+        campoFacturaDirreccion.setText("");
+    }
+            
     
     
     
@@ -360,6 +417,7 @@ public class FormularioFactura extends javax.swing.JDialog {
             Object nuevaFila[] = {codigoProducto,nombreProducto,precioProducto,impuestoProducto,categoriaProducto,precioTotal,nombreCliente,identificacionCliente,direccionCliente};
             modeloFactura.addRow(nuevaFila);
             JOptionPane.showMessageDialog(this, "SE HA GENERADO CORRECTAMENTE LA FACTURA!");
+            guardarArchivoJSON();
             this.dispose();
         }
             
