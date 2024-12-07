@@ -1,13 +1,13 @@
 [
   {
-    "codigoProducto": "1053",
-    "nombreProducto": "Mantequilla",
-    "precioProducto": 25000.0,
-    "impuestoProducto": 2000.0,
+    "codigoProducto": "2023",
+    "nombreProducto": "Queso",
+    "precioProducto": 2500.0,
+    "impuestoProducto": 100.0,
     "categoriaProducto": "Lacteo",
-    "precioTotalProducto": 27000.0,
-    "nombreCliente": "asd",
+    "precioTotalProducto": 2600.0,
+    "nombreCliente": "Luis",
     "identificacionCliente": "Lacteo",
-    "direccionCliente": "asd"
+    "direccionCliente": "Bosque"
   }
 ]

@@ -6,8 +6,13 @@ package miniproyectopoo_2;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.List;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,147 +28,181 @@ public class FormularioFactura extends javax.swing.JDialog {
      */
     private TablaProductosAdmin tablaProductosAdmin;
     private TablaFacturas tablaFacturas;
-    
+
     public FormularioFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
     }
-    
-    public void setTablaFactura(TablaFacturas tablaFacturas){
+
+    public void setTablaFactura(TablaFacturas tablaFacturas) {
         this.tablaFacturas = tablaFacturas;
     }
-    
+
     //GETTER
-    
-    public String getCampoFacturaNombre(){
+    public String getCampoFacturaNombre() {
         return campoFacturaNombre.getText();
     }
-    
-    public String getCampoFacturaIdentificacion(){
+
+    public String getCampoFacturaIdentificacion() {
         return campoFacturaCategoria.getText();
     }
-    
-    public String getCampoFacturaDireccion(){
+
+    public String getCampoFacturaDireccion() {
         return campoFacturaDirreccion.getText();
     }
-    
-    public String getCampoFacturaCodigoProducto(){
+
+    public String getCampoFacturaCodigoProducto() {
         return campoFacturaCodigo.getText();
     }
-    public String getCampoFacturaNombreProducto(){
+
+    public String getCampoFacturaNombreProducto() {
         return campoFacturaNombreProducto.getText();
     }
-    public String getCampoFacturaPrecioProducto(){
+
+    public String getCampoFacturaPrecioProducto() {
         return campoFacturaPrecio.getText();
     }
-    
-    public String getCampoFacturaImpuestoProducto(){
+
+    public String getCampoFacturaImpuestoProducto() {
         return campoFacturaImpuesto.getText();
     }
-    
-    public String getCampoFacturaCategoriaProducto(){
+
+    public String getCampoFacturaCategoriaProducto() {
         return campoFacturaCategoria.getText();
     }
-    public String getCampoFacturaTotalProducto(){
+
+    public String getCampoFacturaTotalProducto() {
         return campoFacturaTotal.getText();
     }
-    
+
     // SETTERS
-    public void setCampoFacturaCodigoProducto(String texto){
+    public void setCampoFacturaCodigoProducto(String texto) {
         this.campoFacturaCodigo.setText(texto);
     }
-    
-    public void setCampoFacturaNombreProducto(String texto){
+
+    public void setCampoFacturaNombreProducto(String texto) {
         this.campoFacturaNombreProducto.setText(texto);
     }
-    
-    public void setCampoFacturaPrecioProducto(String texto){
+
+    public void setCampoFacturaPrecioProducto(String texto) {
         this.campoFacturaPrecio.setText(texto);
-      
+
     }
-    
-    public void setCampoFacturaImpuestoProducto(String texto){
+
+    public void setCampoFacturaImpuestoProducto(String texto) {
         this.campoFacturaImpuesto.setText(texto);
-        
+
     }
-    
-    public void setCampoFacturaCategoriaProducto(String texto){
+
+    public void setCampoFacturaCategoriaProducto(String texto) {
         this.campoFacturaCategoria.setText(texto);
     }
-    
-    public void setCampoFacturaPrecioTotalProducto(String texto){
+
+    public void setCampoFacturaPrecioTotalProducto(String texto) {
         this.campoFacturaTotal.setText(texto);
     }
-    
-    //METODO PARA GUARDAR EN ARCHIVO JSON
-    
-    public void guardarArchivoJSON(){
-        DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla(); 
-        
-        List<Factura> listaFacturas = new ArrayList<Factura>();
-    // Iterar sobre cada fila de la tabla para obtener los valores
-    for (int i = 0; i < modeloFactura.getRowCount(); i++) {
-        // Obtener los datos de la fila
-        
-        //QUEDE ACA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        String codigoProducto = modeloFactura.getValueAt(i, 0).toString();
-        String nombreProducto = modeloFactura.getValueAt(i, 1).toString();
-        double precioProducto = Double.parseDouble(modeloFactura.getValueAt(i, 2).toString());
-        double impuestoProducto = Double.parseDouble(modeloFactura.getValueAt(i, 3).toString());
-        String  categoriaProducto= modeloFactura.getValueAt(i, 4).toString();
-        double precioTotalProducto = Double.parseDouble(modeloFactura.getValueAt(i, 5).toString());
-        
-        String nombreCliente = modeloFactura.getValueAt(i, 6).toString();
 
-        String identificacionCliente = modeloFactura.getValueAt(i, 7).toString();
-        String  direccionCliente= modeloFactura.getValueAt(i, 8).toString();
-        
+    public void guardarArchivoJSON() {
+    try {
+        DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla();
+        List<Factura> listaFacturas = new ArrayList<>();
 
-        // Crear una factura con los datos obtenidos de cada fila
-        Factura factura = new Factura(codigoProducto, nombreProducto, precioProducto, impuestoProducto, categoriaProducto,precioTotalProducto, nombreCliente, identificacionCliente, direccionCliente);
-        
-        // Añadir la factura a la lista
-        listaFacturas.add(factura);
+        for (int i = 0; i < modeloFactura.getRowCount(); i++) {
+            String codigoProducto = modeloFactura.getValueAt(i, 0).toString();
+            String nombreProducto = modeloFactura.getValueAt(i, 1).toString();
+            double precioProducto = Double.parseDouble(modeloFactura.getValueAt(i, 2).toString());
+            double impuestoProducto = Double.parseDouble(modeloFactura.getValueAt(i, 3).toString());
+            String categoriaProducto = modeloFactura.getValueAt(i, 4).toString();
+            double precioTotalProducto = Double.parseDouble(modeloFactura.getValueAt(i, 5).toString());
+            String nombreCliente = modeloFactura.getValueAt(i, 6).toString();
+            String identificacionCliente = modeloFactura.getValueAt(i, 7).toString();
+            String direccionCliente = modeloFactura.getValueAt(i, 8).toString();
+
+            Factura factura = new Factura(codigoProducto, nombreProducto, precioProducto, impuestoProducto,
+                    categoriaProducto, precioTotalProducto, nombreCliente, identificacionCliente, direccionCliente);
+
+            listaFacturas.add(factura);
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        try (FileWriter file = new FileWriter("facturas.json")) {
+            gson.toJson(listaFacturas, file);  
+            JOptionPane.showMessageDialog(this, "Datos guardados correctamente en el archivo JSON");
+            
+        } catch (IOException e) { //MANEJO EXCEPCION IO, MANEJO CUANDO HAY PROBLEMAS PARA ESCRITURA/LECTURA DE ARCHIVOS 
+            JOptionPane.showMessageDialog(this, "Error al guardar los datos en el archivo JSON: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();  
+        }
+
+    } catch (Exception e) { //MANEJO DE EXCEPCION
+        JOptionPane.showMessageDialog(this, "Error en el proceso de guardar datos: " + e.getMessage(),
+                "Error General", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();  
     }
+}
 
-    // Usar Gson para convertir la lista de facturas a formato JSON
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    try (FileWriter file = new FileWriter("facturas.json")) {
-        // Convertir la lista a JSON y guardarlo en el archivo
-        gson.toJson(listaFacturas, file);
-        JOptionPane.showMessageDialog(this, "Datos guardados correctamente en el archivo JSON");
+    
+    //METODO PARA CARGAR ARCHIVO FACTURA DE JSON A LA TABLA.
+public void cargarArchivoJSON() {
+    DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla();
+
+    try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\luisc\\OneDrive\\Documentos\\NetBeansProjects\\MiniProyectoPOO_2\\facturas.json"))) {
+        Gson gson = new Gson();
+        java.lang.reflect.Type tipoFactura = new TypeToken<List<Factura>>() {
+        }.getType();
+
+        List<Factura> facturas = gson.fromJson(reader, tipoFactura);
+
+        modeloFactura.setRowCount(0);
+
+        for (int i = 0; i < facturas.size(); i++) {
+            Factura factura = facturas.get(i);
+            Object[] fila = {
+                factura.getCodigoProducto(),
+                factura.getNombreProducto(),
+                factura.getPrecioProducto(),
+                factura.getImpuestoProducto(),
+                factura.getCategoriaProducto(),
+                factura.getPrecioTotalProducto(),
+                factura.getNombreCliente(),
+                factura.getIdentificacionCliente(),
+                factura.getDireccionCliente()
+            };
+            modeloFactura.addRow(fila);
+        }
+
+        JOptionPane.showMessageDialog(this, "Datos cargados correctamente desde el archivo JSON.");
+    } catch (FileNotFoundException e) { //IMPLEMENTACION DE LA EXEPCION POR SI EL ARCHIVO NO SE ENCUENTRA.
+        JOptionPane.showMessageDialog(this, "El archivo JSON no fue encontrado: " + e.getMessage(), "Error de archivo", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace(); 
+                
+    } catch (IOException e) {
+        //Se captura otra exepcion para cualquier otro error de entrada/salida
+        JOptionPane.showMessageDialog(this, "Error de lectura del archivo JSON: " + e.getMessage(), "Error de I/O", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
     } catch (Exception e) {
-        System.out.println(e.getMessage());
-        JOptionPane.showMessageDialog(this, "ERROR AL GUARDAR LOS DATOS EN EL ARCHIVO JSON");
+        JOptionPane.showMessageDialog(this, "Error al cargar el archivo JSON: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
     }
-        
-    }
-    
-    
-    public void limpiarCamposFactura(){
+}
+
+    //METODO PARA LIMPIAR LOS CAMPOS DEL FORMULARIO PARA CREAR FACTURA.
+    public void limpiarCamposFactura() {
         campoFacturaCodigo.setText("");
         campoFacturaNombreProducto.setText("");
         campoFacturaPrecio.setText("");
         campoFacturaImpuesto.setText("");
         campoFacturaCategoria.setText("");
         campoFacturaTotal.setText("");
-        
+
         campoFacturaNombre.setText("");
         campoFacturaIdentificacion.setText("");
         campoFacturaDirreccion.setText("");
     }
-            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -388,16 +427,16 @@ public class FormularioFactura extends javax.swing.JDialog {
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO DE CANCELAR?", "CONFIRMACION", JOptionPane.YES_NO_OPTION);
-        if(confirmacion == JOptionPane.YES_OPTION){
+        if (confirmacion == JOptionPane.YES_OPTION) {
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "SIGUE LLENADO LOS CAMPOS CON TU INFORMACION!");
         }
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-       DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla();
-       
+        DefaultTableModel modeloFactura = tablaFacturas.getModeloTabla();
+
         //INFORMACION DEL PRODUCTO
         String codigoProducto = getCampoFacturaCodigoProducto();
         String nombreProducto = getCampoFacturaNombreProducto();
@@ -405,26 +444,21 @@ public class FormularioFactura extends javax.swing.JDialog {
         String impuestoProducto = getCampoFacturaImpuestoProducto();
         String categoriaProducto = getCampoFacturaCategoriaProducto();
         String precioTotal = getCampoFacturaTotalProducto();
-        
+
         //INFORMACION DEL CLIENTE 
         String nombreCliente = getCampoFacturaNombre();
         String identificacionCliente = getCampoFacturaIdentificacion();
         String direccionCliente = getCampoFacturaDireccion();
-        
-        if(nombreCliente.isEmpty() || identificacionCliente.isEmpty() || direccionCliente.isEmpty()){
+
+        if (nombreCliente.isEmpty() || identificacionCliente.isEmpty() || direccionCliente.isEmpty()) {
             JOptionPane.showMessageDialog(this, "LOS CAMPOS DE TU INFORMACION PERSONAL, DEBEN DE ESTAR COMPLETAMENTE DILIGENCIADOS");
-        }else{
-            Object nuevaFila[] = {codigoProducto,nombreProducto,precioProducto,impuestoProducto,categoriaProducto,precioTotal,nombreCliente,identificacionCliente,direccionCliente};
+        } else {
+            Object nuevaFila[] = {codigoProducto, nombreProducto, precioProducto, impuestoProducto, categoriaProducto, precioTotal, nombreCliente, identificacionCliente, direccionCliente};
             modeloFactura.addRow(nuevaFila);
             JOptionPane.showMessageDialog(this, "SE HA GENERADO CORRECTAMENTE LA FACTURA!");
             guardarArchivoJSON();
             this.dispose();
         }
-            
-        
-
-
-
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     /**

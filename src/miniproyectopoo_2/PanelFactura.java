@@ -19,11 +19,13 @@ public class PanelFactura extends javax.swing.JPanel {
     private VentanaInicio ventanaInicio;
     private VentanaPrincipal ventanaPrincipal;
     private TablaFacturas tablaFacturas;
-    public PanelFactura(VentanaInicio ventanaInicio,VentanaPrincipal ventanaPrincipal,TablaFacturas tablaFacturas) {
+    private FormularioFactura formularioFactura;
+    public PanelFactura(VentanaInicio ventanaInicio,VentanaPrincipal ventanaPrincipal,TablaFacturas tablaFacturas, FormularioFactura formularioFactura) {
         initComponents();
         this.ventanaInicio = ventanaInicio;
         this.ventanaPrincipal = ventanaPrincipal;
         this.tablaFacturas = tablaFacturas;
+        this.formularioFactura = formularioFactura;
     }
 
     /**
@@ -38,6 +40,7 @@ public class PanelFactura extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         botonEliminar = new javax.swing.JButton();
         botonVolver = new javax.swing.JButton();
+        botonCargar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel1.setText("INFORMACION FACTURACION");
@@ -56,20 +59,32 @@ public class PanelFactura extends javax.swing.JPanel {
             }
         });
 
+        botonCargar.setText("CARGAR");
+        botonCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCargarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(226, 226, 226))
             .addGroup(layout.createSequentialGroup()
                 .addGap(299, 299, 299)
                 .addComponent(botonEliminar)
                 .addGap(81, 81, 81)
                 .addComponent(botonVolver)
                 .addContainerGap(268, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(226, 226, 226))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonCargar)
+                        .addGap(336, 336, 336))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +95,9 @@ public class PanelFactura extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEliminar)
                     .addComponent(botonVolver))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(botonCargar)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,8 +130,16 @@ public class PanelFactura extends javax.swing.JPanel {
 
     }//GEN-LAST:event_botonEliminarActionPerformed
 
+    private void botonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarActionPerformed
+        
+        formularioFactura.cargarArchivoJSON();
+        
+
+    }//GEN-LAST:event_botonCargarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCargar;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel jLabel1;

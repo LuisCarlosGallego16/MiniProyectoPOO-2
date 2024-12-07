@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <productos>
     <producto>
-        <codigo>1054</codigo>
-        <nombre>Leche</nombre>
-        <precio>3200</precio>
-        <impuesto>200</impuesto>
+        <codigo>2023</codigo>
+        <nombre>Queso</nombre>
+        <precio>2500</precio>
+        <impuesto>100</impuesto>
         <categoria>Lacteo</categoria>
-        <total>3400.0</total>
+        <total>2600.0</total>
     </producto>
     <producto>
-        <codigo>1053</codigo>
-        <nombre>Mantequilla</nombre>
-        <precio>25000</precio>
-        <impuesto>2000</impuesto>
-        <categoria>Lacteo</categoria>
-        <total>27000.0</total>
+        <codigo>2024</codigo>
+        <nombre>Arepas</nombre>
+        <precio>3000</precio>
+        <impuesto>200</impuesto>
+        <categoria>Harina</categoria>
+        <total>3200.0</total>
     </producto>
 </productos>

@@ -33,7 +33,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         panelAdmin.setTablaProductosUsuario(tablaProductosUsuario);
         panelUsuario = new PanelUsuario(this, ventanaPrincipal, tablaProductosAdmin, formularioFactura);
         formularioFactura.setTablaFactura(tablaFacturas);
-        panelFactura = new PanelFactura(this,ventanaPrincipal,tablaFacturas);
+        panelFactura = new PanelFactura(this,ventanaPrincipal,tablaFacturas,formularioFactura);
     }
 
     /**
